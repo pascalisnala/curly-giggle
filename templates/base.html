@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" curly-giggle">
+    <meta name="author" content="Nala Krisnanda">
+
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    {% endblock %}
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Page Content  -->
+        <div id="content">
+            {% include 'include/topnav.html' %}
+            {% block page_content %}
+            {% endblock %}
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+</body>
+
+</html>

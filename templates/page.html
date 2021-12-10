@@ -1,4 +1,20 @@
-<h1>
-    Welcome to FastAPI Starter.
-</h1>
+{% extends "base.html" %}
+
+{% block title %}curly-giggle{% endblock %}
+
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+
+{% block page_content %}
+
 {{data.page}}
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
+{% endblock %}
