@@ -10,7 +10,13 @@
     <meta name="description" content=" curly-giggle">
     <meta name="author" content="Nala Krisnanda">
 
-    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+    <!-- css files -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css')}}">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <title>{% block title %}{% endblock %}</title>
 
@@ -20,13 +26,23 @@
 <body>
     <div class="wrapper">
         <!-- Page Content  -->
-        <div id="content">
+        <div id="topnav">
             {% include 'include/topnav.html' %}
+        </div>
+        <div id="content">
             {% block page_content %}
             {% endblock %}
         </div>
+        <div id="footer">
+            {% include 'include/footer.html' %}
+        </div>
+
     </div>
-    <div class="overlay"></div>
+
+
+    <div class="overlay">
+
+    </div>
 
 </body>
 
