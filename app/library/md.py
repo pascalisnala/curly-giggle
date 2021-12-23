@@ -7,8 +7,8 @@ md = (
     MarkdownIt()
     .use(front_matter_plugin)
     .use(footnote_plugin)
-    .disable('image')
-    .enable('table')
+    .disable("image")
+    .enable("table")
 )
 
 
@@ -18,7 +18,5 @@ def openfile(filename):
         text = input_file.read()
 
     html = md.render(text)
-    data = {
-        "text": html
-    }
+    data = {"text": html}
     return data
