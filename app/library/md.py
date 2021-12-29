@@ -20,3 +20,8 @@ def openfile(filename):
     html = md.render(text)
     data = {"text": html}
     return data
+
+
+def render_html(md_text):
+    html = md.render(md_text)
+    return html

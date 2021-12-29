@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+
+{% block page_content %}
+
+{% for domain, articles in data.items() %}
+<div style="padding-bottom: 1em;">
+  <h2 style="line-height: 1.5; margin-top: .2em;">
+    {{domain}}
+  </h2>
+  <hr style="border: .2px solid whitesmoke; margin-top: 0em; margin-bottom: 1.5em;">
+  {% for title, metadata in articles.items() %}
+  <div style="margin-bottom: 1.5em;">
+    <p style="margin-bottom: 0em; line-height: 1; font-weight: 600;">
+      <a href=/articles/{{metadata.url}} class=article-list>
+        {{title}}
+      </a>
+    </p>
+    <span style="font-size: x-small; margin-bottom: 0em; line-height: 0; color: darkslategray;">
+      <i class="far fa-calendar"></i> {{metadata.created_date}} &emsp;
+      <code class="domain-{{color[domain]}}">{{domain}}</code>
+    </span>
+  </div>
+
+  {% endfor %}
+</div>
+{% endfor %}
+
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
+{% endblock %}

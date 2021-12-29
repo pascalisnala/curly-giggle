@@ -1,3 +1,13 @@
 <nav id="main-navbar">
-    <a href="/"> CURLY-GIGGLE</a> / {{page}}
+    {% for item in page %}
+        {% if not loop.last %}
+            <a href="{{item[1]}}"> {{item[0]}}</a> /
+        {% endif %}
+
+        {% if loop.last %}
+            {{item[0]}}</a>
+        {% endif %}
+
+    {% endfor %}
+
 </nav>

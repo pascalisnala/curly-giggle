@@ -2,7 +2,7 @@ Oh hey, I'm **Nala**, currently a <strike>nerd</strike> data analyst in a tech c
 <br><br>
 I have a lot of learning interest specifically in data, engineering, and matemathics area. This site mean to be my safe place where I can express myself.
 I'm not limiting the scope of content of this website, it could be anything related to my learning materials, works, productivity tips, or even my hobbies.
-<br>
+<br> <br>
 Welcome! 🍻
 <br> <br>
 

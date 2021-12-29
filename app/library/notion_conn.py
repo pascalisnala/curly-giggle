@@ -1,33 +1,24 @@
 import requests
 import datetime
+import re
 
-token = "secret_RIXZJ45mgLxYHHXeIQFXJaX4cobAL6OCo6Va3yFvZUb"
-
-database_id = "46f0183f4ca64e9b8e9d2b53917bdef1"
-page_id = "692ec7c9f027439fa2c0985a5c17f764"
-
-headers = {
-    "Authorization": "Bearer " + token,
-    "Content-Type": "application/json",
-    "Notion-Version": "2021-08-16",
-}
+from .notion2html import article_content, article_title
 
 
-def get_domains(id, headers):
+def get_all_domains(id, headers):
     url = f"https://api.notion.com/v1/databases/{id}"
 
     res = requests.request("GET", url, headers=headers)
     data = res.json()
 
-    domains = [
-        domain["name"]
+    domains = {
+        domain["name"]: domain["color"]
         for domain in data["properties"]["Domain Knowledge"]["select"]["options"]
-    ]
+    }
+    return domains
 
-    print(domains)
 
-
-def get_articles_metadata(id, headers, domain=None):
+def get_article_list(id, headers, domain=None, k=None):
     url = f"https://api.notion.com/v1/databases/{id}/query"
 
     if domain:
@@ -59,46 +50,52 @@ def get_articles_metadata(id, headers, domain=None):
 
         out[title]["created_date"] = datetime.datetime.strptime(
             obj["created_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
-        ).strftime("%Y-%m-%d")
+        ).strftime("%b %d, %Y")
         out[title]["last_edited_date"] = datetime.datetime.strptime(
             obj["last_edited_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
-        ).strftime("%Y-%m-%d")
+        ).strftime("%b %d, %Y")
 
         out[title]["domain"] = obj["properties"]["Domain Knowledge"]["select"]["name"]
         out[title]["tags"] = [
             tag["name"] for tag in obj["properties"]["Tags"]["multi_select"]
         ]
-        out[title]["link2full"] = obj["url"]
+        out[title]["url"] = re.findall(r"\/[\w-]+$", obj["url"])[0][1:].lower()
+        out[title]["page_id"] = re.findall(r"-\w+$", obj["url"])[0][1:]
 
     return out
 
 
-def read_page(id, headers):
-    readUrl = f"https://api.notion.com/v1/pages/{id}"
-
-    res = requests.request("GET", readUrl, headers=headers)
+def get_article_metadata(id, headers):
+    # metadata
+    url = f"https://api.notion.com/v1/pages/{id}"
+    res = requests.request("GET", url, headers=headers)
     data = res.json()
-    print(res.status_code)
+    out = {}
+    out["title"] = data["properties"]["Title"]["title"][0]["plain_text"]
+    if data["cover"] != None:
+        out["cover_url"] = data["cover"]["external"]["url"]
+    else:
+        out["cover_url"] = None
+    out["author"] = "Nala Krisnanda"
+    out["domain"] = data["properties"]["Domain Knowledge"]["select"]["name"]
+    out["domain_color"] = data["properties"]["Domain Knowledge"]["select"]["color"]
+    out["created_time"] = datetime.datetime.strptime(
+        data["created_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
+    ).strftime("%b %d, %Y")
+    out["tags"] = [tag["name"] for tag in data["properties"]["Tags"]["multi_select"]]
+
+    return article_title(out)
 
 
-def read_block(id, headers):
-    readUrl = f"https://api.notion.com/v1/blocks/{id}/children"
-
-    res = requests.request("GET", readUrl, headers=headers)
+def get_article_content(id, headers):
+    # content
+    url = f"https://api.notion.com/v1/blocks/{id}/children"
+    res = requests.request("GET", url, headers=headers)
     data = res.json()
-    print(res.status_code)
+    return article_content(data["results"])
 
 
-def read_page(id, headers):
-    readUrl = f""
-
-
-# read_block(page_id, headers)
-# read_page(page_id, headers)
-# read_database(database_id, headers)
-
-# get_domains(database_id, headers)
-import sys
-
-print(sys.prefix)
-print(get_articles_metadata(database_id, headers))
+def get_article(id, headers):
+    cover, title = get_article_metadata(id, headers)
+    content = get_article_content(id, headers)
+    return cover, title + content

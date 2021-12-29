@@ -7,9 +7,14 @@
 
 {% endblock %}
 
+{% block cover %}
+{{cover|safe}}
+{% endblock %}
+
+
 {% block page_content %}
 
-{{data.text|safe}}
+{{data|safe}}
 
 {% endblock %}
 
