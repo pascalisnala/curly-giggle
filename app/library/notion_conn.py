@@ -36,31 +36,36 @@ def get_article_list(id, headers, domain=None, k=None):
     res = requests.request("POST", url, headers=headers, data=filter)
     data = res.json()
 
+    print(data)
+
     out = {}
 
     for obj in data["results"]:
-        title = obj["properties"]["Title"]["title"][0]["plain_text"]
-        out[title] = {}
-        out[title]["created_time"] = datetime.datetime.strptime(
-            obj["created_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
-        ).strftime("%Y-%m-%d %H:%M:%S")
-        out[title]["last_edited_time"] = datetime.datetime.strptime(
-            obj["last_edited_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
-        ).strftime("%Y-%m-%d %H:%M:%S")
+        if obj["properties"]["publish"]["checkbox"]:
+            title = obj["properties"]["Title"]["title"][0]["plain_text"]
+            out[title] = {}
+            out[title]["created_time"] = datetime.datetime.strptime(
+                obj["created_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
+            ).strftime("%Y-%m-%d %H:%M:%S")
+            out[title]["last_edited_time"] = datetime.datetime.strptime(
+                obj["last_edited_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
+            ).strftime("%Y-%m-%d %H:%M:%S")
 
-        out[title]["created_date"] = datetime.datetime.strptime(
-            obj["created_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
-        ).strftime("%b %d, %Y")
-        out[title]["last_edited_date"] = datetime.datetime.strptime(
-            obj["last_edited_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
-        ).strftime("%b %d, %Y")
+            out[title]["created_date"] = datetime.datetime.strptime(
+                obj["created_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
+            ).strftime("%b %d, %Y")
+            out[title]["last_edited_date"] = datetime.datetime.strptime(
+                obj["last_edited_time"], "%Y-%m-%dT%H:%M:%S.%fZ"
+            ).strftime("%b %d, %Y")
 
-        out[title]["domain"] = obj["properties"]["Domain Knowledge"]["select"]["name"]
-        out[title]["tags"] = [
-            tag["name"] for tag in obj["properties"]["Tags"]["multi_select"]
-        ]
-        out[title]["url"] = re.findall(r"\/[\w-]+$", obj["url"])[0][1:].lower()
-        out[title]["page_id"] = re.findall(r"-\w+$", obj["url"])[0][1:]
+            out[title]["domain"] = obj["properties"]["Domain Knowledge"]["select"][
+                "name"
+            ]
+            out[title]["tags"] = [
+                tag["name"] for tag in obj["properties"]["Tags"]["multi_select"]
+            ]
+            out[title]["url"] = re.findall(r"\/[\w-]+$", obj["url"])[0][1:].lower()
+            out[title]["page_id"] = re.findall(r"-\w+$", obj["url"])[0][1:]
 
     return out
 

@@ -4,9 +4,9 @@ from fastapi.templating import Jinja2Templates
 
 from fastapi.staticfiles import StaticFiles
 
-from .library.md import *
-from .library.notion_conn import get_all_domains, get_article_list, get_article
-from .library import config as cfg
+from library.md import *
+from library.notion_conn import get_all_domains, get_article_list, get_article
+from library import config as cfg
 
 import re
 
