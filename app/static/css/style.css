@@ -1,19 +1,33 @@
+    html, body {
+        height: 100%;
+      }
+
     body {
-        margin: 20px;
+        margin: 0em;
+        display: flex;
+        flex-direction: column;
     }
+
+    .wrapper {
+        margin: 20px;
+        flex: 1 0 auto;
+    }
+
+    .footer {
+        padding :20px;
+    }
+
     footer{
-        padding-left: 5px;
-        padding-right: 5px;
-        margin-top: 30px;
-        margin-bottom: 5px;
+        flex-shrink: 0;
         text-align: right;
         font-family: monospace;
         font-weight: 300;
         font-size: medium;
         box-sizing:border-box;
+        width: 100%;
         max-width: 720px;
-        margin: auto;
-
+        margin-left: auto;
+        margin-right: auto;
     }
 
     blockquote {
@@ -80,12 +94,6 @@
         padding-inline-start: 30px;
         padding-block-start: 0em;
     }
-
-    /* .wrapper {
-        box-sizing:border-box;
-        max-width: 720px;
-        margin: auto;
-    } */
 
     code {
         background-color: whitesmoke;
@@ -185,5 +193,49 @@
     .callout-text{
         color: darkslategray;
         font-size: smaller;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto;
+      }
+
+    div.quick-access{
+        margin-top: .5em;
+        margin-bottom: .5em;
+        padding: .3em;
+        padding-left: 1em;
+        padding-right: 1em;
+        border-radius: .3em;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgba(112, 0, 0, 0.637);
+        color: rgb(43, 43, 43);
+    }
+
+    div.quick-access:hover{
+        background-color: rgba(73, 0, 0, 0.795);
+        border-color: rgba(112, 0, 0, 0.637);
+        color: whitesmoke
+    }
+
+
+    a.footer-link{
+        color: black;
+        border-bottom: white;
+    }
+
+    a.footer-link:hover{
+        border-bottom: none;
+        text-decoration: none;
+    }
+
+    a.footer-link:link{
+        text-decoration: none;
+    }
+
+    a.footer-link:visited {
+        text-decoration: none;
+        color: black;
     }
 

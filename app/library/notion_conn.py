@@ -35,9 +35,6 @@ def get_article_list(id, headers, domain=None, k=None):
 
     res = requests.request("POST", url, headers=headers, data=filter)
     data = res.json()
-
-    print(data)
-
     out = {}
 
     for obj in data["results"]:

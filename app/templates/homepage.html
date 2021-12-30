@@ -9,12 +9,41 @@
 
 {% block page_content %}
 
-{{data.text|safe}}
+<div style="margin-top: 30px;" class="grid-container">
+  <div style="line-height: 1.2;">
+    <span style="font-size:50pt; font-weight: 300;">Meet</span> <br>
+    <span style="font-size:50pt; font-weight: bold;"">Nala —</span>
+  </div>
+  <div> </div>
+</div>
+<h2 style=" color:darkslategray; font-weight: 600; margin-top: .2em; text-align: left;">A data enthusiast based on
+      Indonesia</h2>
+      <p>
+        I have a lot of learning interest specifically in data, engineering, and matemathics area. This site intended to
+        be my safe place where I can express myself. I'm not limiting the scope of content of this website, it could be
+        anything related to my learning materials, works, productivity tips, or even my hobbies.
+      </p>
 
-{% endblock %}
+      <span style="font-weight: 500;">
+        Quick navigation
+      </span>
 
-{% block scripts %}
-{{ super() }}
+      <a href="/articles">
+        <div class="quick-access">
+          🧠 &nbsp; Article
+        </div>
+      </a>
+
+      <a href="/resume">
+        <div class="quick-access">
+          🙋‍♂️ &nbsp; Resume
+        </div>
+      </a>
+
+      {% endblock %}
+
+      {% block scripts %}
+      {{ super() }}
 
 
-{% endblock %}
+      {% endblock %}

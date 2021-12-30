@@ -34,7 +34,6 @@
 
 <body>
     <div class="wrapper">
-        <!-- Page Content  -->
         <div id="topnav">
             {% include 'include/topnav.html' %}
         </div>
@@ -44,17 +43,10 @@
             {% block page_content %}
             {% endblock %}
         </div>
-        <div id="footer">
-            {% include 'include/footer.html' %}
-        </div>
-
     </div>
-
-
-    <div class="overlay">
-
+    <div class="footer">
+        {% include 'include/footer.html' %}
     </div>
-
 </body>
 
 </html>
