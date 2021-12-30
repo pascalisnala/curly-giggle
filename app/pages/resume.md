@@ -20,14 +20,15 @@ My job was mainly to help improving the ads ranking in the search result page. I
 ## Education
 #### **Computer Engineering**
 [Universitas Indonesia](https://ui.ac.id) &#8594; Graudated in 2020
-> For my thesis, I developed an Android application which able connect to a MiBand to collect heart rate data, an EEG device to collect brain wave data, and also device camera to collect eyelid opening vision. These data then infered into an time series classification model using Convolutional NN to predict whether the user is in a sleepy condition. Feel free to peek at the [repo](https://github.com/pascalisnala/drowsiness-detection-cnn-ml) or the [quick demo](https://youtu.be/QmL34nxqLng) (in Bahasa Indonesia, sorry 🙏🏼).
+> For my thesis, I developed an Android application which able connect to a MiBand to collect heart rate data, an EEG device to collect brain wave data, and also device camera to collect eyelid opening vision. These data then infered into an time series classification model using Convolutional NN to predict whether the user is in a sleepy condition. Feel free to peek at the [repo](https://github.com/pascalisnala/drowsiness-detection-cnn-ml) or the [quick demo](https://youtu.be/QmL34nxqLng) (transcript in Bahasa Indonesia 🇮🇩).
 
-## Recognition
-> - Top 10  (individual) in [Telkomsel Tech Titans](https://www.telkomseltechtitans.com/s) Data Science Series
-> - Top Teams in [ Shopee National Data Science Competitions (NDSC)](https://careers.shopee.co.id/ndsc/)
-> - Top 50 in [BRI Hackathon](https://brihackathon.id/) People Analytics
-> - [Bangk!t](https://grow.google/intl/id_id/bangkit/) 2020 (ML) Graduated Participant
-> - [Tokopedia Scholarship](https://sites.google.com/tokopedia.com/tokopediascholarship/home) awardee
+## Recognitions
+- Top 10  (individual) in [Telkomsel Tech Titans](https://www.telkomseltechtitans.com/s) Data Science Series
+- Top Teams in [ Shopee National Data Science Competitions (NDSC)](https://careers.shopee.co.id/ndsc/)
+- Top 50 in [BRI Hackathon](https://brihackathon.id/) People Analytics
+- [Bangk!t](https://grow.google/intl/id_id/bangkit/) 2020 (ML) Graduated Participant
+- [Tokopedia Scholarship](https://sites.google.com/tokopedia.com/tokopediascholarship/home) awardee
 
 ## About Me
-Interested to chat? <br> ✉️ inbox to pascalisnala98(at)gmail.com
+Interested to chat? <br>
+[✉️ Message me](mailto:pascalisnala98@gmail.com)
