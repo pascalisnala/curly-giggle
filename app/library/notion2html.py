@@ -128,7 +128,10 @@ def article_content(contents):
 
         if type == "image":
             url = block[type]["file"]["url"]
-            alt = block[type][loc][0]["plain_text"]
+            try:
+                alt = block[type][loc][0]["plain_text"]
+            except:
+                alt = ""
             out += show_image(url, alt)
         else:
             for item in block[type][loc]:

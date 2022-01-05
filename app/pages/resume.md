@@ -23,7 +23,7 @@ My job was mainly to help improving the ads ranking in the search result page. I
 > For my thesis, I developed an Android application which able connect to a MiBand to collect heart rate data, an EEG device to collect brain wave data, and also device camera to collect eyelid opening vision. These data then infered into an time series classification model using Convolutional NN to predict whether the user is in a sleepy condition. Feel free to peek at the [repo](https://github.com/pascalisnala/drowsiness-detection-cnn-ml) or the [quick demo](https://youtu.be/QmL34nxqLng) (transcript in Bahasa Indonesia 🇮🇩).
 
 ## Recognitions
-- Top 10  (individual) in [Telkomsel Tech Titans](https://www.telkomseltechtitans.com/s) Data Science Series
+- Top 10  (individual) in [Telkomsel Tech Titans](https://www.telkomseltechtitans.com/) Data Science Series
 - Top Teams in [ Shopee National Data Science Competitions (NDSC)](https://careers.shopee.co.id/ndsc/)
 - Top 50 in [BRI Hackathon](https://brihackathon.id/) People Analytics
 - [Bangk!t](https://grow.google/intl/id_id/bangkit/) 2020 (ML) Graduated Participant
