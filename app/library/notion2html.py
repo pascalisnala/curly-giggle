@@ -1,3 +1,6 @@
+from email.mime import image
+
+
 list_item = []
 
 
@@ -127,7 +130,8 @@ def article_content(contents):
         loc = "caption" if type == "image" else "text"
 
         if type == "image":
-            url = block[type]["file"]["url"]
+            image_type = block[type]["type"]
+            url = block[type][image_type]["url"]
             try:
                 alt = block[type][loc][0]["plain_text"]
             except:
