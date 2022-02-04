@@ -1,27 +1,4 @@
-from email.mime import image
-
-
 list_item = []
-
-
-def article_title(metadata):
-    out = ""
-    if metadata["cover_url"] != None:
-        cover = f"""
-        <img class="article-cover" src={metadata['cover_url']}>
-        """
-    else:
-        cover = ""
-    title = f"""
-  <h1 style=text-align:left;>{metadata['title']}</h1>
-  """
-    subtitle = f"""
-  <b>{metadata['author']}</b> &emsp; <span style="font-size:smaller; color:darkslategray;"><i class="far fa-calendar"></i> {metadata['created_time']}</span> <br>
-  """
-    tags = f"""
-  <i style='font-size: smaller;'><i class="fas fa-tag"></i> {', '.join(metadata['tags'])}</i>
-  """
-    return cover, out + title + subtitle + tags
 
 
 def tag_from_type(text, type, color=None):
@@ -72,6 +49,11 @@ def tag_from_type(text, type, color=None):
         </div>
         """
 
+    elif type == "toggle":
+        return f"""
+        <button class="toggle"><span class="toggle-title">{text}<span></button>
+        """
+
     else:
         return ""
 
@@ -80,6 +62,10 @@ def hyperlink(text, url):
     return f"""
   <a href={url}>{text}</a>
   """
+
+
+def toggle(title, content):
+    pass
 
 
 def tag_from_annotations(text, annots):
@@ -109,6 +95,14 @@ def show_image(url, alt, hyperlink=None):
     """
 
 
+def insert_toggle_content(toggle_content):
+    return f"""
+    <div class="toggle-content">
+    {toggle_content}
+    </div>
+    """
+
+
 def wrap_list():
     return f"""
     <ul style="margin-top:0em;">
@@ -117,34 +111,65 @@ def wrap_list():
     """
 
 
-def article_content(contents):
+def article_content(block):
     global list_item
-    out = "<br>"
+    out = ""
 
-    for block in contents:
-        type = block["type"]
-        if list_item and type != "bulleted_list_item":
-            out += wrap_list()
-            list_item = []
-        html_text = ""
-        loc = "caption" if type == "image" else "text"
+    type = block["type"]
+    if list_item and type != "bulleted_list_item":
+        out += wrap_list()
+        list_item = []
+    html_text = ""
+    loc = "caption" if type == "image" else "text"
 
-        if type == "image":
-            image_type = block[type]["type"]
-            url = block[type][image_type]["url"]
-            try:
-                alt = block[type][loc][0]["plain_text"]
-            except:
-                alt = ""
-            out += show_image(url, alt)
-        else:
-            for item in block[type][loc]:
-                text = item["plain_text"]
-                if item["href"]:
-                    text = hyperlink(text, item["href"])
-                text = tag_from_annotations(text, item["annotations"])
-                html_text += text
+    if type == "image":
+        image_type = block[type]["type"]
+        url = block[type][image_type]["url"]
+        try:
+            alt = block[type][loc][0]["plain_text"]
+        except:
+            alt = ""
+        out += show_image(url, alt)
+    elif type == "toggle":
+        for item in block[type][loc]:
+            text = item["plain_text"]
+            if item["href"]:
+                text = hyperlink(text, item["href"])
+            text = tag_from_annotations(text, item["annotations"])
+            html_text += text
+        id = block["id"]
+        # print(get_article_content(id, HEADERS))
 
-            out += tag_from_type(html_text, type)
+        out += tag_from_type(html_text, type)
+
+    else:
+        for item in block[type][loc]:
+            text = item["plain_text"]
+            if item["href"]:
+                text = hyperlink(text, item["href"])
+            text = tag_from_annotations(text, item["annotations"])
+            html_text += text
+
+        out += tag_from_type(html_text, type)
 
     return out
+
+
+def article_title(metadata):
+    out = ""
+    if metadata["cover_url"] != None:
+        cover = f"""
+        <img class="article-cover" src={metadata['cover_url']}>
+        """
+    else:
+        cover = ""
+    title = f"""
+  <h1 style=text-align:left;>{metadata['title']}</h1>
+  """
+    subtitle = f"""
+  <b>{metadata['author']}</b> &emsp; <span style="font-size:smaller; color:darkslategray;"><i class="far fa-calendar"></i> {metadata['created_time']}</span> <br>
+  """
+    tags = f"""
+  <i style='font-size: smaller;'><i class="fas fa-tag"></i> {', '.join(metadata['tags'])}</i>
+  """
+    return cover, out + title + subtitle + tags

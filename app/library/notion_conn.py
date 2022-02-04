@@ -2,7 +2,8 @@ import requests
 import datetime
 import re
 
-from .notion2html import article_content, article_title
+from .notion2html import article_content, article_title, insert_toggle_content
+from . import config as cfg
 
 
 def get_all_domains(id, headers):
@@ -38,7 +39,7 @@ def get_article_list(id, headers, domain=None, k=None):
     out = {}
 
     for obj in data["results"]:
-        if obj["properties"]["publish"]["checkbox"]:
+        if obj["properties"][cfg.ENVIRONMENT]["checkbox"]:
             title = obj["properties"]["Title"]["title"][0]["plain_text"]
             out[title] = {}
             out[title]["created_time"] = datetime.datetime.strptime(
@@ -94,7 +95,17 @@ def get_article_content(id, headers):
     url = f"https://api.notion.com/v1/blocks/{id}/children"
     res = requests.request("GET", url, headers=headers)
     data = res.json()
-    return article_content(data["results"])
+    contents = data["results"]
+    out = ""
+    for block in contents:
+        out += article_content(block)
+        if block["type"] == "toggle":
+            toggle_content = insert_toggle_content(
+                get_article_content(block["id"], headers)
+            )
+            out += toggle_content
+    return out
+    # return article_content(data["results"])
 
 
 def get_article(id, headers):

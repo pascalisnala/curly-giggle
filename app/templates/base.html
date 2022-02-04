@@ -47,6 +47,11 @@
     <div class="footer">
         {% include 'include/footer.html' %}
     </div>
+
+    {% block scripts%}
+    <script src="{{url_for('static', path='js/toggle.js')}}"></script>
+    <script src="{{url_for('static', path='js/dyn-greetings.js')}}"></script>
+    {% endblock %}
 </body>
 
 </html>
