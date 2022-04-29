@@ -59,4 +59,4 @@ jobs:
         run: |
           cd $DIR
            /home/runner/.deta/bin/deta deploy
-           /home/runner/.deta/bin/deta visor enable
+           /home/runner/.deta/bin/deta visor disable
