@@ -38,7 +38,6 @@ jobs:
       - name: Clone Deta Metadata
         shell: bash
         run: |
-          /home/runner/.deta/bin/deta --help
           cd $DIR
           /home/runner/.deta/bin/deta clone --name $NAME 
       
@@ -47,4 +46,4 @@ jobs:
         run: |
           cd $DIR
            /home/runner/.deta/bin/deta deploy
-           /home/runner/.deta/bin/deta visor disable
+           /home/runner/.deta/bin/deta visor enable
