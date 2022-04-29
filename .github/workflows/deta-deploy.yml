@@ -40,9 +40,11 @@ jobs:
           echo PAGE_ID: ${{ secrets.PAGE_ID }} >> .env
           echo ENVIRONMENT: PROD >> .env
           
-      - name: create .env files
+      - name: Add Environment Variables
         shell: bash
         run: |
+          /home/runner/.deta/bin/deta --help
+          cat .env
           /home/runner/.deta/bin/deta update -e .env
           
       - name: Clone Deta Metadata
