@@ -39,7 +39,6 @@ jobs:
           echo DATABASE_ID: ${{ secrets.DATABASE_ID }} >> .env
           echo PAGE_ID: ${{ secrets.PAGE_ID }} >> .env
           echo ENVIRONMENT: PROD >> .env
-          cat .env
           /home/runner/.deta/bin/deta update -e .env
           
           
