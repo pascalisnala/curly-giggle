@@ -50,6 +50,7 @@ jobs:
       - name: Add Environment Variables
         shell: bash
         run: |
+          cat .env
           cd $DIR
           /home/runner/.deta/bin/deta update -e .env 
       
