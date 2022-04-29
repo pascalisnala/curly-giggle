@@ -8,3 +8,4 @@ jinja2==3.0.2
 markdown-it-py[plugins] == 2.0.0
 pytest==6.2.5
 black
+aiohttp

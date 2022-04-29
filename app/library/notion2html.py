@@ -1,3 +1,5 @@
+import asyncio
+
 list_item = []
 
 
@@ -95,7 +97,7 @@ def show_image(url, alt, hyperlink=None):
     """
 
 
-def insert_toggle_content(toggle_content):
+async def insert_toggle_content(toggle_content):
     return f"""
     <div class="toggle-content">
     {toggle_content}
@@ -111,7 +113,7 @@ def wrap_list():
     """
 
 
-def article_content(block):
+async def article_content(block):
     global list_item
     out = ""
 

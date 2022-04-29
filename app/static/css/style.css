@@ -108,6 +108,9 @@
         border-radius: .3em;
         padding: 1.5em;
         line-height: 1.8;
+        overflow-y: auto;
+        text-align: left;
+        white-space: pre !important;
     }
 
     #main-navbar {

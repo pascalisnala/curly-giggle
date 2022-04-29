@@ -8,6 +8,8 @@ from library.md import *
 from library.notion_conn import get_all_domains, get_article_list, get_article
 from library import config as cfg
 
+import asyncio
+
 import re
 
 app = FastAPI()
@@ -70,6 +72,8 @@ async def home(request: Request):
 
     articles = {}
 
+    tasks = []
+
     for domain in domains:
         articles[domain] = get_article_list(cfg.DATABASE_ID, cfg.HEADERS, domain)
 
@@ -95,7 +99,7 @@ async def home(request: Request, url: str):
     nav_text = [text.upper() for text in nav_text]
     id = re.findall(r"-\w+$", url)[0][1:]
 
-    cover, data = get_article(id, cfg.HEADERS)
+    cover, data = await get_article(id, cfg.HEADERS)
 
     return templates.TemplateResponse(
         "content.html",

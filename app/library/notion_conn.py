@@ -1,6 +1,10 @@
 import requests
 import datetime
 import re
+import time
+import asyncio
+import aiohttp
+
 
 from .notion2html import article_content, article_title, insert_toggle_content
 from . import config as cfg
@@ -68,7 +72,7 @@ def get_article_list(id, headers, domain=None, k=None):
     return out
 
 
-def get_article_metadata(id, headers):
+async def get_article_metadata(id, headers):
     # metadata
     url = f"https://api.notion.com/v1/pages/{id}"
     res = requests.request("GET", url, headers=headers)
@@ -90,25 +94,33 @@ def get_article_metadata(id, headers):
     return article_title(out)
 
 
-def get_article_content(id, headers):
-    # content
+async def process_block(block, id=None, headers=None):
+    if block["type"] == "toggle":
+        contents = "".join(await get_article_content(id, headers))
+        return await article_content(block) + await insert_toggle_content(contents)
+    else:
+        return await article_content(block)
+
+
+async def get_article_content(id, headers):
+    tasks = []
     url = f"https://api.notion.com/v1/blocks/{id}/children"
-    res = requests.request("GET", url, headers=headers)
-    data = res.json()
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url=url, headers=headers, ssl=False) as res:
+            data = await res.json()
     contents = data["results"]
-    out = ""
     for block in contents:
-        out += article_content(block)
-        if block["type"] == "toggle":
-            toggle_content = insert_toggle_content(
-                get_article_content(block["id"], headers)
-            )
-            out += toggle_content
-    return out
-    # return article_content(data["results"])
+        tasks.append(asyncio.create_task(process_block(block, block["id"], headers)))
+    responses = await asyncio.gather(*tasks)
+    return responses
 
 
-def get_article(id, headers):
-    cover, title = get_article_metadata(id, headers)
-    content = get_article_content(id, headers)
+async def get_article(id, headers):
+    tasks = []
+    tasks.append(asyncio.create_task(get_article_metadata(id, headers)))
+    tasks.append(asyncio.create_task(get_article_content(id, headers)))
+    responses = await asyncio.gather(*tasks)
+    cover, title = responses[0]
+    content = responses[1]
+    content = "".join(content)
     return cover, title + content
