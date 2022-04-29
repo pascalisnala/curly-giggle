@@ -38,11 +38,12 @@ jobs:
         shell: bash
         run: |
           cd $DIR
-          deta clone --name $NAME --project default 
+           ~/.deta/bin/deta clone --name $NAME --project default tmp/
+           cp -r tmp/.deta .
       
       - name: Deploy to Deta
         shell: bash
         run: |
           cd $DIR
-          deta deploy
-          deta visor disable
+           ~/.deta/bin/deta deploy
+           ~/.deta/bin/deta visor disable
