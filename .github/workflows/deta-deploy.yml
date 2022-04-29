@@ -37,9 +37,10 @@ jobs:
       - name: Clone Deta Metadata
         shell: bash
         run: |
+          /home/runner/.deta/bin/deta --help
           cd $DIR
-           /home/runner/.deta/bin/deta clone --name $NAME --project default tmp/
-           cp -r tmp/.deta .
+          /home/runner/.deta/bin/deta clone --name $NAME --project default tmp/
+          cp -r tmp/.deta .
       
       - name: Deploy to Deta
         shell: bash
