@@ -1,4 +1,4 @@
-var text = ["Recontrer", "会う", "Temui", "Tavata", "Ontmoet", "Conocer a", "만나다"];
+var text = ["Meet", "Recontrer", "会う", "Temui", "Tavata", "Conocer a", "만나다"];
 var counter = 0;
 var elem = document.getElementById("dyn-greetings");
 var inst = setInterval(change, 1000);
