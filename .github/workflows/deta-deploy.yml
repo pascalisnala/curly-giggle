@@ -45,7 +45,7 @@ jobs:
         run: |
           cd $DIR
           /home/runner/.deta/bin/deta clone --name $NAME 
-          cp -r .env
+          cp .env  /home/runner/work/curly-giggle/curly-giggle/app/
       
       - name: Add Environment Variables
         shell: bash
