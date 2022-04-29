@@ -50,7 +50,7 @@ jobs:
         shell: bash
         run: |
           cd $DIR
-          /home/runner/.deta/bin/deta update -e .env --name app
+          /home/runner/.deta/bin/deta update -e /home/runner/.env 
       
       - name: Deploy to Deta
         shell: bash
