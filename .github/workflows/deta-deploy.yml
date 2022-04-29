@@ -49,7 +49,8 @@ jobs:
       - name: Add Environment Variables
         shell: bash
         run: |
-          /home/runner/.deta/bin/deta update -e .env
+          cd $DIR
+          /home/runner/.deta/bin/deta update -e .env --name app
       
       - name: Deploy to Deta
         shell: bash
