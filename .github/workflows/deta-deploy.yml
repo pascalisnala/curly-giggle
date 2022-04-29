@@ -35,10 +35,10 @@ jobs:
         shell: bash
         run: |
           touch .env
-          echo TOKEN: ${{ secrets.TOKEN }} >> .env
-          echo DATABASE_ID: ${{ secrets.DATABASE_ID }} >> .env
-          echo PAGE_ID: ${{ secrets.PAGE_ID }} >> .env
-          echo ENVIRONMENT: PROD >> .env
+          echo TOKEN=${{ secrets.TOKEN }} >> .env
+          echo DATABASE_ID=${{ secrets.DATABASE_ID }} >> .env
+          echo PAGE_ID=${{ secrets.PAGE_ID }} >> .env
+          echo ENVIRONMENT=PROD >> .env
           
       - name: Clone Deta Metadata
         shell: bash
