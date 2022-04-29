@@ -40,7 +40,7 @@ jobs:
           echo PAGE_ID: ${{ secrets.PAGE_ID }} >> .env
           echo ENVIRONMENT: PROD >> .env
           cat .env
-          deta update -e .env
+          /home/runner/.deta/bin/deta update -e .env
           
           
       - name: Clone Deta Metadata
