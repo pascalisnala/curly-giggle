@@ -43,8 +43,6 @@ jobs:
       - name: Add Environment Variables
         shell: bash
         run: |
-          /home/runner/.deta/bin/deta --help
-          cat .env
           /home/runner/.deta/bin/deta update -e .env
           
       - name: Clone Deta Metadata
