@@ -45,12 +45,13 @@ jobs:
         run: |
           cd $DIR
           /home/runner/.deta/bin/deta clone --name $NAME 
+          cp -r .env
       
       - name: Add Environment Variables
         shell: bash
         run: |
           cd $DIR
-          /home/runner/.deta/bin/deta update -e ~/home/runner/.env 
+          /home/runner/.deta/bin/deta update -e .env 
       
       - name: Deploy to Deta
         shell: bash
