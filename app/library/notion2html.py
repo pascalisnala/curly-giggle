@@ -146,7 +146,11 @@ async def article_content(block):
 
     else:
         for item in block[type][loc]:
-            text = item["plain_text"]
+            text = (
+                f"\[{item['plain_text']}\]"
+                if item['type'] == "equation"
+                else item["plain_text"]
+            )
             if item["href"]:
                 text = hyperlink(text, item["href"])
             text = tag_from_annotations(text, item["annotations"])
