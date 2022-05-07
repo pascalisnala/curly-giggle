@@ -97,6 +97,10 @@ def show_image(url, alt, hyperlink=None):
     """
 
 
+def show_equation(expression):
+    return f"<p>\[{expression}\]</p"
+
+
 async def insert_toggle_content(toggle_content):
     return f"""
     <div class="toggle-content">
@@ -143,12 +147,14 @@ async def article_content(block):
         # print(get_article_content(id, HEADERS))
 
         out += tag_from_type(html_text, type)
-
+    elif type == "equation":
+        expression = block[type]["expression"]
+        out += show_equation(expression)
     else:
         for item in block[type][loc]:
             text = (
-                f"\[{item['plain_text']}\]"
-                if item['type'] == "equation"
+                f"\({item['plain_text']}\)"
+                if item["type"] == "equation"
                 else item["plain_text"]
             )
             if item["href"]:

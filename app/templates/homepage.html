@@ -56,6 +56,5 @@
 
       {% block scripts %}
       {{ super() }}
-
-
+      <script src="{{url_for('static', path='js/dyn-greetings.js')}}"></script>
       {% endblock %}
